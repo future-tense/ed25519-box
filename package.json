@@ -1,6 +1,6 @@
 {
   "name": "@futuretense/ed25519-box",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Simple public-key encryption for nodejs and browsers",
   "main": "lib/commonjs/index.js",
   "module": "lib/esm/index.js",
