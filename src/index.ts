@@ -6,6 +6,14 @@ import {
     decrypt as _decrypt
 } from '@futuretense/secret-box'
 
+/**
+ *
+ * @param privKey -
+ * @param pubKey -
+ * @param input -
+ * @param nonce -
+ * @param authenticate -
+ */
 export function encrypt(
     privKey: Uint8Array,
     pubKey: Uint8Array,
@@ -17,6 +25,14 @@ export function encrypt(
     return _encrypt(input, key, nonce, authenticate);
 }
 
+/**
+ *
+ * @param privKey -
+ * @param pubKey -
+ * @param input -
+ * @param nonce -
+ * @param authenticate -
+ */
 export function decrypt(
     privKey: Uint8Array,
     pubKey: Uint8Array,
@@ -28,8 +44,16 @@ export function decrypt(
     return _decrypt(input, key, nonce, authenticate);
 }
 
+/**
+ * @internal
+ */
 const ec = new Eddsa('ed25519');
 
+/**
+ * @internal
+ * @param privKey -
+ * @param pubKey -
+ */
 function deriveKey(
     privKey: Uint8Array,
     pubKey: Uint8Array
@@ -40,6 +64,10 @@ function deriveKey(
     return new Uint8Array(sha256.arrayBuffer(secret));
 }
 
+/**
+ * @internal
+ * @param seed -
+ */
 function getScalar(seed) {
     const hash = sha512.array(seed);
     hash[0]  &= 0xf8;
