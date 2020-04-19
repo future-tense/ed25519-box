@@ -45,5 +45,5 @@ function getScalar(seed) {
     hash[0]  &= 0xf8;
     hash[31] &= 0x3f;
     hash[31] |= 0x40;
-    hash.slice(0, 32);
+    return hash.slice(0, 32);
 }
