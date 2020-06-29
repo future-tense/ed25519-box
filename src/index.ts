@@ -15,10 +15,10 @@ import {
  * @param authenticate -
  */
 export function encrypt(
-    privKey: Uint8Array,
-    pubKey: Uint8Array,
-    input,
-    nonce: Uint8Array | null,
+    privKey: Buffer,
+    pubKey: Buffer,
+    input: Buffer,
+    nonce: Buffer | null,
     authenticate: Boolean = true
 ): Promise<Uint8Array> {
     const key = deriveKey(privKey, pubKey);
@@ -34,10 +34,10 @@ export function encrypt(
  * @param authenticate -
  */
 export function decrypt(
-    privKey: Uint8Array,
-    pubKey: Uint8Array,
-    input,
-    nonce: Uint8Array | null,
+    privKey: Buffer,
+    pubKey: Buffer,
+    input: Buffer,
+    nonce: Buffer | null,
     authenticate: Boolean = true
 ): Promise<Uint8Array> {
     const key = deriveKey(privKey, pubKey);
@@ -55,20 +55,20 @@ const ec = new Eddsa('ed25519');
  * @param pubKey -
  */
 function deriveKey(
-    privKey: Uint8Array,
-    pubKey: Uint8Array
+    privKey: Buffer,
+    pubKey: Buffer
 ) {
     const scalar = ec.decodeInt(getScalar(privKey));
-    const point  = ec.decodePoint(Array.from(pubKey));
+    const point  = ec.decodePoint(pubKey.toString('hex'));
     const secret = ec.encodePoint(point.mul(scalar));
-    return new Uint8Array(sha256.arrayBuffer(secret));
+    return Buffer.from(sha256.arrayBuffer(secret));
 }
 
 /**
  * @internal
  * @param seed -
  */
-function getScalar(seed) {
+function getScalar(seed: string | number[] | ArrayBuffer | Uint8Array) {
     const hash = sha512.array(seed);
     hash[0]  &= 0xf8;
     hash[31] &= 0x3f;
