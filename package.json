@@ -32,11 +32,13 @@
     "js-sha512": "^0.8.0"
   },
   "devDependencies": {
+    "@types/elliptic": "^6.4.12",
     "@types/node": "^13.13.0",
+    "@types/randombytes": "^2.0.0",
     "ava": "^3.7.0",
     "ava-ts": "^0.25.2",
     "gh-pages": "^2.2.0",
-    "secure-random": "^1.1.2",
+    "randombytes": "^2.1.0",
     "ts-node": "^8.8.2",
     "typedoc": "^0.17.4",
     "typescript": "^3.8.3"

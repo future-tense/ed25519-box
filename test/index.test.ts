@@ -1,7 +1,7 @@
 import test from 'ava'
 
 import { eddsa as Eddsa } from 'elliptic';
-import * as secureRandom from 'secure-random';
+import randombytes from 'randombytes';
 
 import { encrypt, decrypt } from '../src'
 
@@ -12,8 +12,8 @@ function generatePubKey(seed: Buffer): Buffer {
     return Buffer.from(key.getPublic())
 }
 
-const aliceSeed = secureRandom(32, {type: 'Buffer'});
-const bobSeed = secureRandom(32, {type: 'Buffer'});
+const aliceSeed = Buffer.from(randombytes(32));
+const bobSeed = Buffer.from(randombytes(32));
 const alicePubkey = generatePubKey(aliceSeed);
 const bobPubkey = generatePubKey(bobSeed);
 
