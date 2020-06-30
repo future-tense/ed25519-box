@@ -17,8 +17,8 @@ import {
 export function encrypt(
     privKey: Buffer,
     pubKey: Buffer,
-    input: Buffer,
-    nonce: Buffer | null,
+    input: any,
+    nonce: Uint8Array | null,
     authenticate: Boolean = true
 ): Promise<Uint8Array> {
     const key = deriveKey(privKey, pubKey);
@@ -36,8 +36,8 @@ export function encrypt(
 export function decrypt(
     privKey: Buffer,
     pubKey: Buffer,
-    input: Buffer,
-    nonce: Buffer | null,
+    input: any,
+    nonce: Uint8Array | null,
     authenticate: Boolean = true
 ): Promise<Uint8Array> {
     const key = deriveKey(privKey, pubKey);
